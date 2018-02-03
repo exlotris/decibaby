@@ -7,7 +7,7 @@ double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul 
 int NbSample = 2; // Doit avoir la meme valeur que microValue[]
 double tableauValeurVolt[10] = { };
 double tableauValeurVolt_leq10[10] = { };
-int nouvelEmplacement = 0;
+int index = 0;
 int nbValeur = 10;
 double Running_Leq = 0;
 double V_0=0.001 ; //La tension correspondant au niveau zero Decibel (*1000)
@@ -43,33 +43,33 @@ int main () {
     }
     printf("sum %lf\n", sum);
 
-    tableauValeurVolt[nouvelEmplacement]=sum/NbSample;
-    printf("nouvelEmplacement %lf\n", nouvelEmplacement);
-    printf("Nouvelle valeur %lf\n", tableauValeurVolt[nouvelEmplacement]);
+    tableauValeurVolt[index]=sum/NbSample;
+    printf("index %4d\n", index);
+    printf("Nouvelle valeur %lf\n", tableauValeurVolt[index]);
 
 
     if (tableauValeurVolt[nbValeur-1] != 0)
     {
-      if (nouvelEmplacement != 0)
+      if (index != 0)
       {
-        Running_Leq -= tableauValeurVolt[nouvelEmplacement-1];
-        Running_Leq += tableauValeurVolt[nouvelEmplacement];
+        Running_Leq -= tableauValeurVolt[index-1];
+        Running_Leq += tableauValeurVolt[index];
       }
       else
       {
         Running_Leq -= tableauValeurVolt[nbValeur-1];
-        Running_Leq += tableauValeurVolt[nouvelEmplacement];
+        Running_Leq += tableauValeurVolt[index];
       }
     }
     else
     {
-      Running_Leq += tableauValeurVolt[nouvelEmplacement];
+      Running_Leq += tableauValeurVolt[index];
     }
     // Calule la running average du leq
-    nouvelEmplacement++;
-    //if (nouvelEmplacement==nbValeur)
+    index++;
+    //if (index==nbValeur)
     //{
-    //  nouvelEmplacement=0;
+    //  index=0;
     //}
     for(int i=0; i<nbValeur;i++)
     {
