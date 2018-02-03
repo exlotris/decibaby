@@ -68,7 +68,7 @@ int main () {
     data[i] =  num[i];
   }
   //AffichageTab(data, sizeof(data)/sizeof(double));
-  while (looop<nbValeur) {
+  while (looop<431) {
     /*int array[NbSample];
     for(int i = 0; i < NbSample; i++)
     {
@@ -133,7 +133,7 @@ int main () {
     AffichageTab(tableauValeurVolt_leq10, sizeof(tableauValeurVolt_leq10)/sizeof(double));
 
     //somme les valeurs utile pour le Leq10
-    int sum10 =0;
+    sum10=0;
     for (int i=0; i<(nbValeur/10); i++)
     {
       sum10+= tableauValeurVolt_leq10[i];
