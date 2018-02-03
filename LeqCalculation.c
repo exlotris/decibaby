@@ -35,10 +35,10 @@ void AffichageTab (double tableau[], int length) {
   }
   printf("\n");
 }
-double* LireCSV(const char *filename, int lenght)
+double* LireCSV(const char *filename)
 {
   double tmp = 0;
-  static double tab[lenght];
+  static double tab[431];
   int i = 0;
   FILE *f;
   if((f = fopen(filename, "r")) == NULL)
@@ -62,7 +62,7 @@ int main () {
   int * num;
   double data[];
   // Call getArray function to get pointer to array
-  num = LireCSV(data.csv, 431);
+  num = LireCSV(data.csv);
   for (int i = 0; i < 431; ++i)
   {
     data[i] =  num[i];
