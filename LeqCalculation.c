@@ -35,7 +35,7 @@ void AffichageTab (double tableau[], int length) {
   }
   printf("\n");
 }
-double* LireCSV(const char *filename)
+int* LireCSV(const char *filename)
 {
   double tmp = 0;
   static double tab[431];
