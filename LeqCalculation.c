@@ -4,7 +4,7 @@
 #include <math.h>
 
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
-int NbSample = 2; // Doit avoir la meme valeur que microValue[]
+int NbSample = 4; // Doit avoir la meme valeur que microValue[]
 double tableauValeurVolt[10] = { };
 double tableauValeurVolt_leq10[10] = { };
 int indexTableau = 0;
@@ -17,8 +17,26 @@ double leqmax=0; //Valeur du leqmax initiale
 double sum =0;
 double sum10=0; //
 
-int cmpfunc (const void * a, const void * b) {
-   return ( *(int*)a - *(int*)b );
+static int cmp (void const *a, void const *b)
+{
+   int ret = 0;
+   double const *pa = a;
+   double const *pb = b;
+   double diff = *pa - *pb;
+   if (diff > 0)
+   {
+      ret = 1;
+   }
+   else if (diff < 0)
+   {
+      ret = -1;
+   }
+   else
+   {
+      ret = 0;
+   }
+
+   return ret;
 }
 
 int main () {
@@ -29,8 +47,8 @@ int main () {
 
   int looop=0;
   while (looop<20) {
-    int array[2];
-    for(int i = 0; i < 2; i++)
+    int array[NbSample];
+    for(int i = 0; i < NbSample; i++)
     {
       array[i] = (rand() % 500)+1;
       printf("%4d\n", array[i]);
@@ -84,7 +102,7 @@ int main () {
     }
 
     // Trie le tableau tels que les valeurs les + grandes soient en premiere position
-    qsort(tableauValeurVolt_leq10, nbValeur, sizeof(int), cmpfunc);
+    qsort(tableauValeurVolt_leq10, sizeof tableauValeurVolt_leq10 / sizeof *tableauValeurVolt_leq10, sizeof *tableauValeurVolt_leq10, cmp);
     for(int j = 0; j < nbValeur; j++) {
         printf("%lf\n", tableauValeurVolt_leq10[j]);
     }
