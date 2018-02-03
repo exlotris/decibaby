@@ -27,20 +27,15 @@ int main () {
   ret = log10(x);
   printf("log10(%lf) = %lf\n", x, ret);
 
-
-
-
-  int array[2], i;
-  for(i = 0; i < 2; i++)
-  {
-    array[i] = (rand() % 100)+1;
-    printf("%4d\n", array[i]);
-  }
-
-
-
   int looop=0;
   while (looop<300) {
+    int array[2];
+    for(int i = 0; i < 2; i++)
+    {
+      array[i] = (rand() % 100)+1;
+      printf("%4d\n", array[i]);
+    }
+
     sum = 0;
     for (int i=0; i<NbSample; i++)
     {
