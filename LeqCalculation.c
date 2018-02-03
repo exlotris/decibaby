@@ -86,7 +86,7 @@ int main () {
     // Calcule le leq du tableau microValue
     leq = 20*log10(Running_Leq/(nbValeur*V_0));
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
-    leqmax = 20*log10((tableauValeurVolt_leq10[0]+tableauValeurVolt_leq10[1])/(2*V_0));
+    leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
     printf("%4d\n", leq);
     printf("%4d\n", leq10);
     printf("%4d\n", leqmax);
