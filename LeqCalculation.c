@@ -153,7 +153,7 @@ int main () {
         printf("Received %d\n", buf[0]);
         b = buf[0];
         AnalogReadArduino = a;
-        AnalogReadArduino = smallNum << 8 | b;
+        AnalogReadArduino = AnalogReadArduino << 8 | b;
         //AnalogReadArduino = (int) buf[0];
         printf("Received %d\n", AnalogReadArduino);
         }
