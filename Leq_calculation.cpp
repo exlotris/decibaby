@@ -40,27 +40,53 @@ double previous_leq10=0; //Valeur utilisée pour le determiner si nouvelle evalu
 double leqmax=0; //Valeur du leqmax initiale
 double previous_leqmax=0; //Valeur utilisée pour le determiner si nouvelle evaluation de l'affichage
 double sum10=0; //
-const int numbargraphs = 1;// Number of Bargraph board, ne doit pas être changé
 
 
-// Bargraph object : we call it BG
-SFEbarGraph BG;
+//get the index of the minimum value in the array
 
-void setup() {
-//declare which pin is for input and output
-//pinMode(Led_Leq_Max_Pin, OUTPUT);
-//pinMode(Led_Leq_10_Pin, OUTPUT);
-//pinMode(Led_Leq_Pin, OUTPUT);
-Serial.begin(115200);
-  // Without parameters, it defaults to one bargraph board and LATch pin set to 10 on Uno, or 53 on Mega.
-  // You can also call it with the number of daisy-chained boards (1-8, default 1), using the default LATch pin.
-  // Or you can call it with both the number of boards and the LATch pin you wish to use.
-  // For two bargraphs and pin 9 for the latch pin, call BG.begin(2,9);
-  BG.begin(numbargraphs); //LATch pin set to 10 on Uno, or 53 on Mega.
+int getIndexOfMin(int * array, int size){
+    int min = *array;
+    int i = 0 ;
+    int index = 0;
+    for (i = 0 ; i < size; i++){
+        if (min > *(array+i)){
+            min = *(array+i);
+            index = i;
+        }
+    }
+    return index;
 }
+
+//remove the minimum value from the array
+
+void removeAnIndexFromArray(int* array, int size, int index){
+    *(array + index) = 0;
+    if (index != (size-1)){
+        int i = index;
+        for (i = index; i < (size -1); i++){
+            *(array + i) = *(array + (i+1));
+        }
+    }
+}
+//code pour trier tableau
+int* sortArray(int* array, int size){
+    int min  = *array;
+    int originalSize = size;
+    int * temp;
+    temp = (int* )malloc(sizeof(int) * size);
+    int i = size-1;
+    int index;
+    while(size > 0){
+        index = getIndexOfMin(array,size);
+        temp[i--] = array[index];
+        removeAnIndexFromArray(array, size --,index);
+    }
+    return temp;
+}
+
 //*********************************************************************************
 //*********************************************************************************
-void loop()
+void main()
 {
                                       // read the value from the micro after filtering:
 for(int i=0; i<NbSample; i++) {
@@ -106,8 +132,7 @@ tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
 
 
                                       // Trie le tableau tels que les valeurs les + grandes soient en premiere position
-sortArrayReverse(tableauValeurVolt_leq10,nbValeur);
-
+NewValue_Leq10 = sortArray(NewValue_Leq10,NbTotalSample);
 int sum10 =0;
 for (int i=0; i<(nbValeur/10); i++)
   {
@@ -123,320 +148,4 @@ leq10 = 20*log10(sum10/((nbValeur/10)*V_0/1000));
 
                                       // Calcule le leqmax du tableau microValue
 leqmax = 20*log10((tableauValeurVolt_leq10[0]+tableauValeurVolt_leq10[1])/(2*V_0/1000));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////Affichage des bargraph/////
-                                      // Declaration des constantes pour leds à eclairer bargraph
-unsigned char spot;
-unsigned char spot10;
-unsigned char spotleq;
-
-int delta_leq_abs = abs(previous_leq - leq); // calculate the absolute value of the difference btw prevous and current leq value
-int delta_leq_10_abs = abs(previous_leq10 - leq10); // calculate the absolute value of the difference btw prevous and current leq value
-int delta_leq_max_abs = abs(previous_leqmax - leqmax); // calculate the absolute value of the difference btw prevous and current leq value
-
-//Leq Bargraph
-if (delta_leq >= delta_leq_abs) // Si la difference entre valeur precedente et nouvelle valeur du leq est assez grande > Reevaluation des leds
-{
-   if (leq >= 90)
-   {
-    for (spotleq = 1; spotleq <= 10; spotleq++)
-      {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-      }
-    }
-
-   if ( (leq >= 85) && (leq < 90) )
-   {
-    for (spotleq = 1; spotleq <= 9; spotleq++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spotleq,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-   }
-   if ((leq >= 80) && (leq < 85) )
-   {
-    for (spotleq = 1; spotleq <= 8; spotleq++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spotleq,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-   }
-    if ((leq >= 75) && (leq < 80))
-   {
-    for (spotleq = 1; spotleq <= 7; spotleq++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spotleq,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-    }
-    if ((leq >= 70) && (leq < 75))
-   {
-    for (spotleq = 1; spotleq <= 6; spotleq++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spotleq,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-    }
-
-    if ((leq >= 65) && (leq < 70))
-   {
-    for (spotleq = 1; spotleq <= 5; spotleq++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spotleq,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-   }
-    if ((leq >= 60) && (leq < 65))
-   {
-    for (spotleq = 1; spotleq <= 4; spotleq++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spotleq,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-   }
-
-     if((leq >= 55) && (leq < 60))
-   {
-    for (spotleq = 1; spotleq <= 3; spotleq++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spotleq,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-    }
-    if ((leq >= 55) && (leq < 55))
-   {
-    for (spotleq = 1; spotleq <= 2; spotleq++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spotleq,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-    if ((leq >= 45) && (leq < 50))
-   {
-      //BG.clear(); // Clear the canvas
-      BG.paint(1,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-}
-
-// LeqMax Bargraph
-if (delta_leqmax >= delta_leq_max_abs) // Si la difference entre valeur precedente et nouvelle valeur du leqmax est assez grande > Reevaluation des leds
-{
- if ( (leqmax >= 105) )
- {
-    for (spot = 21; spot <= 30; spot++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-  if ( (leqmax >= 100) && (leqmax < 105) )
-  {
-    for (spot = 21; spot <= 29; spot++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-  if ((leqmax >= 95) && (leqmax < 100))
-  {
-    for (spot = 21; spot <= 28; spot++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-    if ((leqmax >= 90) && (leqmax < 95))
-    {
-    for (spot = 21; spot <= 27; spot++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-    if ((leqmax >= 85) && (leqmax < 90))
-    {
-    for (spot = 21; spot <= 26; spot++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-    if ((leqmax >= 80) && (leqmax < 85))
-    {
-    for (spot = 21; spot <= 25; spot++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-      if ((leqmax >= 75) && (leqmax < 80))
-      {
-    for (spot = 21; spot <= 24; spot++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-
-      if ((leqmax >= 70) && (leqmax < 75))
-      {
-    for (spot = 21; spot <= 23; spot++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-     if ((leqmax >= 65) && (leqmax < 70) )
-     {
-      //BG.clear(); // Clear the canvas
-      BG.paint(21,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-  }
-}
-
-// Leq10 Bargraph                                                         //valider le else if ?
-else if (delta_leq10 >= delta_leq_10_abs) // Si la difference entre valeur precedente et nouvelle valeur du leq10 est assez grande > Reevaluation des leds
-{
-
- if ((leq10 >= 95))
- {
-    for (spot10 = 11; spot10 <= 20; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-  if ((leq10 >= 90) && (leq10<95))
-  {
-    for (spot10 = 11; spot10 <= 19; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-   if ((leq10 >= 85) && (leq10 < 90))
-   {
-    for (spot10 = 11; spot10 <= 18; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-      if ((leq10 >= 80)&&(leq10 < 85))
-      {
-    for (spot10 = 11; spot10 <= 17; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-        if ((leq10 >= 75) && (leq10 < 80))
-        {
-    for (spot10 = 11; spot10 <= 16; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-
-      if ((leq10 >= 70) && (leq10 < 75))
-      {
-    for (spot10 = 11; spot10 <= 15; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-    if ((leq10 >= 65) && (leq10 < 70))
-    {
-    for (spot10 = 11; spot10 <= 14; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-    if ((leq10 >= 60) && (leq10 < 65))
-    {
-    for (spot10 = 11; spot10 <= 13; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-    if ((leq10 >= 55) && (leq10 < 60))
-    {
-    for (spot10 = 11; spot10 <= 12; spot10++)
-    {
-      //BG.clear(); // Clear the canvas
-      BG.paint(spot10,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-  }
-   if ((leq10 >= 50) && (leq10 < 55))
-   {
-      BG.paint(11,HIGH); // Turn on one LED
-      BG.send(); // Send the canvas to the display
-    }
-}
-
-previous_leq=leq; //Valeur utilisée pour le delta
-previous_leq10=leq10; //Valeur utilisée pour le delta
-previous_leqmax=leqmax; //Valeur utilisée pour le delta
 }
