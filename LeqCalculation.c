@@ -150,8 +150,7 @@ int main () {
         // need to wait a short while so that it can respond.
         //
         // 1ms seems to be enough but it depends on what workload it has
-        int val;
-        unsigned char cmd[16];
+
     if (write(file, cmd, 1) == 1) {
         usleep(10000);
         char buf[1];
