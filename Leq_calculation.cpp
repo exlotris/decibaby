@@ -1,12 +1,9 @@
-#include "SparkFunBarGraph.h"
-#include "ArduinoSort.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
-#include "SPI.h"
-
-// Info :
 
 //Pin declaration*******************************************************
-byte microPin = A0;          // select the input pin for the micro input
+//int microPin = 0;          // select the input pin for the micro input
 //byte Led_Leq_Max_Pin = 7;      // LED of the Leq Max
 //byte Led_Leq_10_Pin = 6;      // LED Leq10
 //byte Led_Leq_Pin = 5;         //LED leq
@@ -34,11 +31,8 @@ const int Running_Average_Count_Leq10 = 300;  //To be defined
 //declaration of constant***********************************************
 //**********************************************************************
 double leq=0; // Valeur du leq initiale
-double previous_leq=0; //Valeur utilisée pour le determiner si nouvelle evaluation de l'affichage
 double leq10=0; // Valeur du leq10 initiale
-double previous_leq10=0; //Valeur utilisée pour le determiner si nouvelle evaluation de l'affichage
 double leqmax=0; //Valeur du leqmax initiale
-double previous_leqmax=0; //Valeur utilisée pour le determiner si nouvelle evaluation de l'affichage
 double sum10=0; //
 
 
@@ -86,13 +80,13 @@ int* sortArray(int* array, int size){
 
 //*********************************************************************************
 //*********************************************************************************
-void main()
+int main()
 {
-                                      // read the value from the micro after filtering:
-for(int i=0; i<NbSample; i++) {
-microValue[i] = analogRead(microPin); // Lit les valeurs du micro et les stock dans le tableau microValue[],
-                                      // ces valeurs sont sous forme de voltage
-}
+//                                      // read the value from the micro after filtering:
+//for(int i=0; i<NbSample; i++)
+//  {
+//    microValue[i] = analogRead(microPin); // Lit les valeurs du micro et les stock dans le tableau microValue[],
+//  }                                    // ces valeurs sont sous forme de voltage
 
                                       // Calcule la moyenne des valeurs de microValue
 int sum =0;
@@ -118,7 +112,7 @@ else
   {
     Running_Leq += tableauValeurVolt[nouvelEmplacement];
   }
-                                      // Calule la running average du leq
+// Calule la running average du leq
 
 nouvelEmplacement += 1;
 if (nouvelEmplacement==nbValeur) {
@@ -128,11 +122,9 @@ for(int i=0; i<nbValeur;i++){
 tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
 }
 
+// Trie le tableau tels que les valeurs les + grandes soient en premiere position
+tableauValeurVolt_leq10 = sortArray(tableauValeurVolt_leq10,nbValeur);
 
-
-
-                                      // Trie le tableau tels que les valeurs les + grandes soient en premiere position
-NewValue_Leq10 = sortArray(NewValue_Leq10,NbTotalSample);
 int sum10 =0;
 for (int i=0; i<(nbValeur/10); i++)
   {
@@ -148,4 +140,5 @@ leq10 = 20*log10(sum10/((nbValeur/10)*V_0/1000));
 
                                       // Calcule le leqmax du tableau microValue
 leqmax = 20*log10((tableauValeurVolt_leq10[0]+tableauValeurVolt_leq10[1])/(2*V_0/1000));
+return 0;
 }
