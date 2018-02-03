@@ -67,10 +67,10 @@ int main () {
     }
     // Calule la running average du leq
     nouvelEmplacement++;
-    if (nouvelEmplacement==nbValeur)
-    {
-      nouvelEmplacement=0;
-    }
+    //if (nouvelEmplacement==nbValeur)
+    //{
+    //  nouvelEmplacement=0;
+    //}
     for(int i=0; i<nbValeur;i++)
     {
       tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
