@@ -18,6 +18,7 @@ void setup() {
 }
  
 void loop() {
+  delay(100);
  volt = analogRead(analogPin);
 }
  
@@ -26,7 +27,10 @@ void receiveData(int byteCount)
 {
   while(Wire.available()) 
   {
-    number = volt;
+    number = Wire.read();
+    if (number == 1){
+      number = volt;
+    }
   }
 }
 // callback for sending data
