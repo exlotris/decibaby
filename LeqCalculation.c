@@ -112,7 +112,6 @@ int main () {
   }
   //*********************************************************************
   //*********************************************************************
-  printf("Ligne 115\n");
 
 
   while (looop<2) {
@@ -137,15 +136,7 @@ int main () {
     //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
     int val;
     unsigned char cmd[16];
-
-    if (0 == sscanf(0, "%d", &val)) {
-      fprintf(stderr, "Invalid parameter");
-      exit(1);
-    }
-    printf("Ligne 145\n");
-    printf("Sending %d\n", val);
-
-    cmd[0] = val;
+    cmd[0] = 1;
         // As we are not talking to direct hardware but a microcontroller we
         // need to wait a short while so that it can respond.
         //
@@ -162,9 +153,6 @@ int main () {
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);
     }
-
-
-
 
 
 
