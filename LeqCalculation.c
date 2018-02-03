@@ -17,24 +17,32 @@ double leqmax=0; //Valeur du leqmax initiale
 double sum =0;
 double sum10=0; //
 
+
+
+//fonction pour le tri du tableau
 static int cmp (void const *a, void const *b)
 {
    int ret = 0;
    double const *pa = a;
    double const *pb = b;
-   double diff = *pb - *pa;
+   double diff = *pb - *pa;//ce qui defini si c'est croissant ou decroissant
    if (diff > 0) {ret = 1;}
    else if (diff < 0) { ret = -1;}
    else { ret = 0;}
    return ret;
 }
 
+
+//permet d'afficher un tableau sur une ligne
 void AffichageTab (double tableau[], int length) {
   for(int j = 0; j < length; j++) {
       printf(" %lf", tableau[j]);
   }
   printf("\n");
 }
+
+
+//permet de lire un fichier csv
 double* LireCSV(const char *filename)
 {
   double tmp = 0;
@@ -55,8 +63,11 @@ double* LireCSV(const char *filename)
 }
 
 int main () {
-  int looop=0;
-  int i;
+  //*********************************************************************
+  //lecture d'un fichier destiné à être remplacer par la lecture du micro
+  //*********************************************************************
+
+  int looop=0; //au final le loop sera infini
 
   // Pointer to store array
   double * num;
@@ -68,6 +79,8 @@ int main () {
     data[i] =  num[i];
   }
   //AffichageTab(data, sizeof(data)/sizeof(double));
+  //*********************************************************************
+  //*********************************************************************
   while (looop<431) {
     /*int array[NbSample];
     for(int i = 0; i < NbSample; i++)
@@ -87,10 +100,9 @@ int main () {
     */
     tableauValeurVolt[indexTableau]=data[looop];
 
-    AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
+    //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
-
-    // Calule la running average du leq
+    // Calule la moyenne du leq
     if (tableauValeurVolt[nbValeur-1] != 0)
     {
       if (indexTableau != 0)
@@ -108,29 +120,21 @@ int main () {
     {
       Running_Leq += tableauValeurVolt[indexTableau];
     }
-
-
-
-
-
+    //augmente l'index du tableau de valeur principale, et le retourne a zero si necessaire
     indexTableau++;
     if (indexTableau==nbValeur)
     {
       indexTableau=0;
     }
-
-
-
     //copie tableau
     for(int i=0; i<nbValeur;i++)
     {
       tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
     }
-
     // Trie le tableau tels que les valeurs les + grandes soient en premiere position
     qsort(tableauValeurVolt_leq10, sizeof tableauValeurVolt_leq10 / sizeof *tableauValeurVolt_leq10, sizeof *tableauValeurVolt_leq10, cmp);
 
-    AffichageTab(tableauValeurVolt_leq10, sizeof(tableauValeurVolt_leq10)/sizeof(double));
+    //AffichageTab(tableauValeurVolt_leq10, sizeof(tableauValeurVolt_leq10)/sizeof(double));
 
     //somme les valeurs utile pour le Leq10
     sum10=0;
