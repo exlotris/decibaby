@@ -40,7 +40,7 @@ int main () {
 
 
   int looop=0;
-  while (looop>300) {
+  while (looop<300) {
     sum = 0;
     for (int i=0; i<NbSample; i++)
     {
