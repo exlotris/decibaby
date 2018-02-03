@@ -157,7 +157,7 @@ int main () {
     AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
     // Calule la moyenne du leq
-    if (tableauValeurVolt[nbValeur-1] != 0)
+    if (looop>=nbValeur)
     {
       if (indexTableau != 0)
       {
