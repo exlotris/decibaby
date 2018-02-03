@@ -27,7 +27,7 @@ double leq10=0; // Valeur du leq10 initiale
 double leqmax=0; //Valeur du leqmax initiale
 double sum =0;
 double sum10=0; //
-
+int AnalogReadArduino=0;
 
 
 //fonction pour le tri du tableau
@@ -147,13 +147,13 @@ int main () {
         char buf[1];
         if (read(file, buf, 1) == 1)
         {
-          int temp = (int) buf[0];
-          printf("Received %lf\n", temp/1024*5);
+          AnalogReadArduino = (int) buf[0];
+          printf("Received %lf\n", AnalogReadArduino/1024*5);
         }
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);
     }
-    tableauValeurVolt[indexTableau]=temp/1024*5;
+    tableauValeurVolt[indexTableau]=AnalogReadArduino/1024*5;
 
 
     // Calule la moyenne du leq
