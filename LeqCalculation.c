@@ -29,10 +29,8 @@ static int cmp (void const *a, void const *b)
    return ret;
 }
 
-void AffichageTab (double *tableau) {
-  int n = sizeof(tableau)/sizeof(double);
-  printf(" %4d\n", n);
-  for(int j = 0; j < n; j++) {
+void AffichageTab (double tableau, int length) {
+  for(int j = 0; j < length; j++) {
       printf(" %lf", tableau[j]);
   }
   printf("\n");
@@ -106,7 +104,7 @@ int main () {
         printf(" %lf", tableauValeurVolt_leq10[j]);
     }
     printf("\n");
-    AffichageTab(tableauValeurVolt_leq10);
+    AffichageTab(tableauValeurVolt_leq10, sizeof(tableauValeurVolt_leq10)/sizeof(double));
     int sum10 =0;
     for (int i=0; i<(nbValeur/10); i++)
     {
