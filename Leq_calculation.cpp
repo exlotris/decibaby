@@ -1,12 +1,8 @@
-#include "SparkFunBarGraph.h"
-#include "ArduinoSort.h"
-#include <math.h>
-#include "SPI.h"
-
-// Info :
+#include <stdio.h>
+#include <stdlib.h>
 
 //Pin declaration*******************************************************
-byte microPin = A0;          // select the input pin for the micro input
+//byte microPin = A0;          // select the input pin for the micro input
 //byte Led_Leq_Max_Pin = 7;      // LED of the Leq Max
 //byte Led_Leq_10_Pin = 6;      // LED Leq10
 //byte Led_Leq_Pin = 5;         //LED leq
@@ -34,11 +30,8 @@ const int Running_Average_Count_Leq10 = 300;  //To be defined
 //declaration of constant***********************************************
 //**********************************************************************
 double leq=0; // Valeur du leq initiale
-double previous_leq=0; //Valeur utilisée pour le determiner si nouvelle evaluation de l'affichage
 double leq10=0; // Valeur du leq10 initiale
-double previous_leq10=0; //Valeur utilisée pour le determiner si nouvelle evaluation de l'affichage
 double leqmax=0; //Valeur du leqmax initiale
-double previous_leqmax=0; //Valeur utilisée pour le determiner si nouvelle evaluation de l'affichage
 double sum10=0; //
 
 
@@ -118,7 +111,7 @@ else
   {
     Running_Leq += tableauValeurVolt[nouvelEmplacement];
   }
-                                      // Calule la running average du leq
+// Calule la running average du leq
 
 nouvelEmplacement += 1;
 if (nouvelEmplacement==nbValeur) {
@@ -128,11 +121,9 @@ for(int i=0; i<nbValeur;i++){
 tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
 }
 
-
-
-
-                                      // Trie le tableau tels que les valeurs les + grandes soient en premiere position
+// Trie le tableau tels que les valeurs les + grandes soient en premiere position
 NewValue_Leq10 = sortArray(NewValue_Leq10,NbTotalSample);
+
 int sum10 =0;
 for (int i=0; i<(nbValeur/10); i++)
   {
