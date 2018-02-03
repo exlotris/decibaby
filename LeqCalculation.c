@@ -173,7 +173,7 @@ int main () {
         Running_Leq -= tableauValeurVolt[0];
         Running_Leq += tableauValeurVolt[indexTableau];
       }
-    
+
     //augmente l'index du tableau de valeur principale, et le retourne a zero si necessaire
     indexTableau++;
     if (indexTableau==nbValeur)
@@ -207,7 +207,7 @@ int main () {
     printf("leqmax %lf\n", leqmax);
 
     looop++;
-    delay(1);
+    delay(70);
   }
   return(0);
 }
