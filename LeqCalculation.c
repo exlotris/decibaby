@@ -29,7 +29,7 @@ static int cmp (void const *a, void const *b)
    return ret;
 }
 
-void AffichageTab (double tableau, int length) {
+void AffichageTab (double tableau[], int length) {
   for(int j = 0; j < length; j++) {
       printf(" %lf", tableau[j]);
   }
