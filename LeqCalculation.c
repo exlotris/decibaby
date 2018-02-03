@@ -148,7 +148,7 @@ int main () {
         if (read(file, buf, 1) == 1)
         {
           AnalogReadArduino = (int) buf[0];
-          printf("Received %lf\n", AnalogReadArduino/204.8);
+          printf("Received %lf\n", AnalogReadArduino);
         }
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);
@@ -157,7 +157,7 @@ int main () {
     AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
     // Calule la moyenne du leq
-    if (looop>=nbValeur)
+    if (looop>=nbValeur-1)
     {
       if (indexTableau != 0)
       {
