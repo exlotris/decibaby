@@ -4,11 +4,11 @@
 #include <math.h>
 
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
-int NbSample = 4; // Doit avoir la meme valeur que microValue[]
+int NbSample = 10; // Doit avoir la meme valeur que microValue[]
 double tableauValeurVolt[40] = { };
 double tableauValeurVolt_leq10[40] = { };
 int indexTableau = 0;
-int nbValeur = 10;
+int nbValeur = 40;
 double Running_Leq = 0;
 double V_0=0.001 ; //La tension correspondant au niveau zero Decibel (*1000)
 double leq=0; // Valeur du leq initiale
@@ -46,7 +46,7 @@ int main () {
   printf("log10(%lf) = %lf\n", x, ret);
 
   int looop=0;
-  while (looop<20) {
+  while (looop<nbValeur) {
     int array[NbSample];
     for(int i = 0; i < NbSample; i++)
     {
