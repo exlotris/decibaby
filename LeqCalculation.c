@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
