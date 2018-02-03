@@ -43,11 +43,6 @@ int main(int argc, char** argv) {
     int val;
     unsigned char cmd[16];
 
-    if (0 == sscanf(argv[arg], "%d", &val)) {
-      fprintf(stderr, "Invalid parameter %d \"%s\"\n", arg, argv[arg]);
-      exit(1);
-    }
-    printf("argv[arg] %d\n", argv[arg]);
     printf("Sending %d\n", val);
 
     cmd[0] = val;
