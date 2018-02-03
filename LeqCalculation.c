@@ -144,14 +144,13 @@ int main () {
 
     if (write(file, cmd, 1) == 1) {
         usleep(10000);
-        char buf[1];
+        char buf[2];
         char a,b;
-        read(file, buf, 1);
+        read(file, buf, 2);
         printf("Received %d\n", buf[0]);
         a = buf[0];
-        read(file, buf, 1);
-        printf("Received %d\n", buf[0]);
-        b = buf[0];
+        printf("Received %d\n", buf[1]);
+        b = buf[1];
         AnalogReadArduino = a;
         AnalogReadArduino = AnalogReadArduino << 8 | b;
         //AnalogReadArduino = (int) buf[0];
