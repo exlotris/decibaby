@@ -1,15 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-<<<<<<< HEAD
 #include <math.h>
 
 //Pin declaration*******************************************************
 //int microPin = 0;          // select the input pin for the micro input
-=======
-
-//Pin declaration*******************************************************
-//byte microPin = A0;          // select the input pin for the micro input
->>>>>>> 1075b018aa93e0ddce714f68d45fe48f860b1bc9
 //byte Led_Leq_Max_Pin = 7;      // LED of the Leq Max
 //byte Led_Leq_10_Pin = 6;      // LED Leq10
 //byte Led_Leq_Pin = 5;         //LED leq
@@ -129,11 +123,7 @@ tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
 }
 
 // Trie le tableau tels que les valeurs les + grandes soient en premiere position
-<<<<<<< HEAD
 tableauValeurVolt_leq10 = sortArray(tableauValeurVolt_leq10,nbValeur);
-=======
-NewValue_Leq10 = sortArray(NewValue_Leq10,NbTotalSample);
->>>>>>> 1075b018aa93e0ddce714f68d45fe48f860b1bc9
 
 int sum10 =0;
 for (int i=0; i<(nbValeur/10); i++)
