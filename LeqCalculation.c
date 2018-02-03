@@ -163,23 +163,17 @@ int main () {
     AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
     // Calule la moyenne du leq
-    if (looop>=nbValeur-1)
-    {
-      if (indexTableau != 0)
+      if (indexTableau != nbValeur-1)
       {
-        Running_Leq -= tableauValeurVolt[indexTableau-1];
+        Running_Leq -= tableauValeurVolt[indexTableau+1];
         Running_Leq += tableauValeurVolt[indexTableau];
       }
       else
       {
-        Running_Leq -= tableauValeurVolt[nbValeur-1];
+        Running_Leq -= tableauValeurVolt[0];
         Running_Leq += tableauValeurVolt[indexTableau];
       }
-    }
-    else
-    {
-      Running_Leq += tableauValeurVolt[indexTableau];
-    }
+    
     //augmente l'index du tableau de valeur principale, et le retourne a zero si necessaire
     indexTableau++;
     if (indexTableau==nbValeur)
@@ -213,7 +207,7 @@ int main () {
     printf("leqmax %lf\n", leqmax);
 
     looop++;
-    delay(100);
+    delay(1);
   }
   return(0);
 }
