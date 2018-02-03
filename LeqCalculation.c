@@ -154,10 +154,10 @@ int main () {
         AnalogReadArduino = a;
         AnalogReadArduino = AnalogReadArduino << 8 | b;
         //AnalogReadArduino = (int) buf[0];
-        printf("Received %lf\n", AnalogReadArduino/204.8);
+        printf("Received %lf\n", AnalogReadArduino/310.3);
         }
 
-    tableauValeurVolt[indexTableau]=AnalogReadArduino/204.8;
+    tableauValeurVolt[indexTableau]=AnalogReadArduino/310.3;
     //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
     // Calule la moyenne du leq

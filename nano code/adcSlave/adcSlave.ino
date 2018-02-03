@@ -15,7 +15,7 @@ void setup() {
 
  // initialize i2c as slave
  Wire.begin(SLAVE_ADDRESS);
- 
+ analogReference(EXTERNAL);
  // define callbacks for i2c communication
  Wire.onReceive(receiveData);
  Wire.onRequest(sendData);
