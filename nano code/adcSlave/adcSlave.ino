@@ -3,8 +3,8 @@
 #define SLAVE_ADDRESS 0x04
 int number = 0;
 int state = 0;
- 
-double temp;
+int analogPin = 3;
+int volt = 0;
  
 void setup() {
  pinMode(13, OUTPUT);
@@ -18,48 +18,18 @@ void setup() {
 }
  
 void loop() {
- delay(100);
- temp = GetTemp();
+ volt = analogRead(analogPin);
 }
  
 // callback for received data
-void receiveData(int byteCount){
- 
- while(Wire.available()) {
-  number = Wire.read();
- 
-  if (number == 1){
-   if (state == 0){
-    digitalWrite(13, HIGH); // set the LED on
-    state = 1;
-   } else{
-    digitalWrite(13, LOW); // set the LED off
-    state = 0;
-   }
+void receiveData(int byteCount)
+{
+  while(Wire.available()) 
+  {
+    number = volt;
   }
- 
-  if(number==2) {
-   number = (int)temp;
-  }
- }
 }
- 
 // callback for sending data
 void sendData(){
  Wire.write(number);
-}
- 
-// Get the internal temperature of the arduino
-double GetTemp(void)
-{
- unsigned int wADC;
- double t;
- ADMUX = (_BV(REFS1) | _BV(REFS0) | _BV(MUX3));
- ADCSRA |= _BV(ADEN); // enable the ADC
- delay(20); // wait for voltages to become stable.
- ADCSRA |= _BV(ADSC); // Start the ADC
- while (bit_is_set(ADCSRA,ADSC));
- wADC = ADCW;
- t = (wADC - 324.31 ) / 1.22;
- return (t);
 }
