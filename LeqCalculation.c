@@ -41,10 +41,10 @@ int main () {
     {
       sum+= array[i]/100;
     }
-    printf("sum %4d\n", sum);
+    printf("sum %lf\n", sum);
 
     tableauValeurVolt[nouvelEmplacement]=sum/NbSample;
-    printf("Nouvelle valeur %4d\n", tableauValeurVolt[nouvelEmplacement]);
+    printf("Nouvelle valeur %lf\n", tableauValeurVolt[nouvelEmplacement]);
 
 
     if (tableauValeurVolt[nbValeur-1] != 0)
