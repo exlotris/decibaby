@@ -14,6 +14,10 @@ double leq10=0; // Valeur du leq10 initiale
 double leqmax=0; //Valeur du leqmax initiale
 double sum10=0; //
 
+int cmpfunc (const void * a, const void * b) {
+   return ( *(int*)a - *(int*)b );
+}
+
 int main () {
    double x, ret;
    x = 5000;
@@ -80,7 +84,4 @@ int main () {
                                           // Calcule le leqmax du tableau microValue
     leqmax = 20*log10((tableauValeurVolt_leq10[0]+tableauValeurVolt_leq10[1])/(2*V_0/1000));
    return(0);
-}
-int cmpfunc (const void * a, const void * b) {
-   return ( *(int*)a - *(int*)b );
 }
