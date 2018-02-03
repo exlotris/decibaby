@@ -65,7 +65,7 @@ double* LireCSV(const char *filename)
   while(!feof(f))
   {
     fscanf(f, "%lf", &tmp);
-    printf("tmp = %f \n", tmp);
+    //printf("tmp = %f \n", tmp);
     tab[i] = tmp;
     i++;
   }
@@ -135,11 +135,24 @@ int main () {
     //tableauValeurVolt[indexTableau]=data[looop];
 
     //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
+    int val;
+    unsigned char cmd[16];
 
+    if (0 == sscanf(argv[arg], "%d", &val)) {
+      fprintf(stderr, "Invalid parameter %d \"%s\"\n", arg, argv[arg]);
+      exit(1);
+    }
+
+    printf("Sending %d\n", val);
+    
+    cmd[0] = val;
         // As we are not talking to direct hardware but a microcontroller we
         // need to wait a short while so that it can respond.
         //
         // 1ms seems to be enough but it depends on what workload it has
+        int val;
+        unsigned char cmd[16];
+    if (write(file, cmd, 1) == 1) {
         usleep(10000);
         char buf[1];
         if (read(file, buf, 1) == 1)
@@ -149,6 +162,7 @@ int main () {
         }
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);
+    }
 
 
 
