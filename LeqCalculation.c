@@ -112,7 +112,7 @@ int main () {
   }
   //*********************************************************************
   //*********************************************************************
-
+  printf("Ligne 115\n");
 
 
   while (looop<2) {
@@ -142,7 +142,7 @@ int main () {
       fprintf(stderr, "Invalid parameter");
       exit(1);
     }
-
+    printf("Ligne 145\n");
     printf("Sending %d\n", val);
 
     cmd[0] = val;
