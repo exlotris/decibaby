@@ -127,7 +127,7 @@ tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
 }
 
 // Trie le tableau tels que les valeurs les + grandes soient en premiere position
-tableauValeurVolt_leq10 = sortArray(tableauValeurVolt_leq10,nbValeur);
+tableauValeurVolt_leq10 = sortArray(*tableauValeurVolt_leq10,nbValeur);
 
 int sum10 =0;
 for (int i=0; i<(nbValeur/10); i++)
