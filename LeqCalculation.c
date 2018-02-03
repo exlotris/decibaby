@@ -5,8 +5,8 @@
 
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 4; // Doit avoir la meme valeur que microValue[]
-double tableauValeurVolt[10] = { };
-double tableauValeurVolt_leq10[10] = { };
+double tableauValeurVolt[40] = { };
+double tableauValeurVolt_leq10[40] = { };
 int indexTableau = 0;
 int nbValeur = 10;
 double Running_Leq = 0;
@@ -65,9 +65,9 @@ int main () {
 
 
     for(int j = 0; j < nbValeur; j++) {
-        printf("%lf\n", tableauValeurVolt[j]);
+        printf(" %lf", tableauValeurVolt[j]);
     }
-
+    printf("\n");
 
     printf("indexTableau %4d\n", indexTableau);
     printf("Nouvelle valeur %lf\n", tableauValeurVolt[indexTableau]);
@@ -104,8 +104,9 @@ int main () {
     // Trie le tableau tels que les valeurs les + grandes soient en premiere position
     qsort(tableauValeurVolt_leq10, sizeof tableauValeurVolt_leq10 / sizeof *tableauValeurVolt_leq10, sizeof *tableauValeurVolt_leq10, cmp);
     for(int j = 0; j < nbValeur; j++) {
-        printf("%lf\n", tableauValeurVolt_leq10[j]);
+        printf(" %lf", tableauValeurVolt_leq10[j]);
     }
+    printf("\n");
     int sum10 =0;
     for (int i=0; i<(nbValeur/10); i++)
     {
