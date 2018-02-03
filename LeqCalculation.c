@@ -67,9 +67,9 @@ int main () {
   {
     data[i] =  num[i];
   }
-  AffichageTab(data, sizeof(data)/sizeof(double));
+  //AffichageTab(data, sizeof(data)/sizeof(double));
   while (looop<nbValeur) {
-    int array[NbSample];
+    /*int array[NbSample];
     for(int i = 0; i < NbSample; i++)
     {
       array[i] = (rand() % 500)+1;
@@ -84,6 +84,8 @@ int main () {
     printf("sum %lf\n", sum);
 
     tableauValeurVolt[indexTableau]=sum/NbSample;
+    */
+    tableauValeurVolt[indexTableau]=data[looop];
 
     AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
