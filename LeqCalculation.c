@@ -85,6 +85,9 @@ int main () {
 
     // Trie le tableau tels que les valeurs les + grandes soient en premiere position
     qsort(tableauValeurVolt_leq10, nbValeur, sizeof(int), cmpfunc);
+    for(int j = 0; j < nbValeur; j++) {
+        printf("%lf\n", tableauValeurVolt_leq10[j]);
+    }
     int sum10 =0;
     for (int i=0; i<(nbValeur/10); i++)
     {
