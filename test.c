@@ -16,7 +16,7 @@ double sum10=0; //
 
 int main () {
    double x, ret;
-   x = 10000;
+   x = 5000;
 
    /* finding value of log1010000 */
    ret = log10(x);
