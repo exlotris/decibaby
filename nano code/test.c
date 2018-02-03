@@ -42,10 +42,16 @@ int main(int argc, char** argv) {
   for (arg = 1; arg < argc; arg++) {
     int val;
     unsigned char cmd[16];
-
+    /*
+    if (0 == sscanf(argv[arg], "%d", &val)) {
+      fprintf(stderr, "Invalid parameter %d \"%s\"\n", arg, argv[arg]);
+      exit(1);
+    }
+    printf("argv[arg] %d\n", argv[arg]);
+    */
     printf("Sending %d\n", val);
 
-    cmd[0] = val;
+    cmd[0] = 1;
     if (write(file, cmd, 1) == 1) {
       // As we are not talking to direct hardware but a microcontroller we
       // need to wait a short while so that it can respond.
