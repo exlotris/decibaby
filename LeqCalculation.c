@@ -5,10 +5,10 @@
 
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 2; // Doit avoir la meme valeur que microValue[]
-double tableauValeurVolt[300] = { };
-double tableauValeurVolt_leq10[300] = { };
+double tableauValeurVolt[5] = { };
+double tableauValeurVolt_leq10[5] = { };
 int nouvelEmplacement = 0;
-int nbValeur = 300;
+int nbValeur = 5;
 double Running_Leq = 0;
 double V_0=0.001 ; //La tension correspondant au niveau zero Decibel (*1000)
 double leq=0; // Valeur du leq initiale
@@ -28,18 +28,18 @@ int main () {
   printf("log10(%lf) = %lf\n", x, ret);
 
   int looop=0;
-  while (looop<300) {
+  while (looop<20) {
     int array[2];
     for(int i = 0; i < 2; i++)
     {
-      array[i] = (rand() % 100)+1;
+      array[i] = (rand() % 500)+1;
       printf("%4d\n", array[i]);
     }
 
     sum = 0;
     for (int i=0; i<NbSample; i++)
     {
-      sum+= array[i];
+      sum+= array[i]/100;
     }
 
     tableauValeurVolt[nouvelEmplacement]=sum/NbSample;
@@ -86,7 +86,7 @@ int main () {
     printf("leq10 %4d\n", leq10);
     printf("leqmax %4d\n", leqmax);
     looop++;
-    delay(1000);
+    delay(800);
   }
   return(0);
 }
