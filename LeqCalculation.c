@@ -44,6 +44,13 @@ int main () {
     printf("sum %lf\n", sum);
 
     tableauValeurVolt[indexTableau]=sum/NbSample;
+
+
+    for(int j = 0; j < nbValeur; j++) {
+        printf("%lf\n", tableauValeurVolt[j]);
+    }
+
+
     printf("indexTableau %4d\n", indexTableau);
     printf("Nouvelle valeur %lf\n", tableauValeurVolt[indexTableau]);
 
@@ -77,9 +84,6 @@ int main () {
     }
 
     // Trie le tableau tels que les valeurs les + grandes soient en premiere position
-    for(int j = 0; j < nbValeur; j++) {
-        printf("%d\n", tableauValeurVolt_leq10[j]);
-    }
     qsort(tableauValeurVolt_leq10, nbValeur, sizeof(int), cmpfunc);
     int sum10 =0;
     for (int i=0; i<(nbValeur/10); i++)
