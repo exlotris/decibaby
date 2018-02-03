@@ -35,6 +35,7 @@ int main(int argc, char** argv) {
     fprintf(stderr, "I2C: Failed to acquire bus access/talk to slave 0x%x\n", ADDRESS);
     exit(1);
   }
+  printf("argv[arg] %d\n", argv[arg]);
 
   int arg;
 
@@ -51,7 +52,6 @@ int main(int argc, char** argv) {
 
     cmd[0] = val;
     if (write(file, cmd, 1) == 1) {
-
       // As we are not talking to direct hardware but a microcontroller we
       // need to wait a short while so that it can respond.
       //
