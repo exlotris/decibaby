@@ -147,7 +147,7 @@ int main () {
     printf("leq10 %lf\n", leq10);
     printf("leqmax %lf\n", leqmax);
     looop++;
-    delay(800);
+    delay(100);
   }
   return(0);
 }
