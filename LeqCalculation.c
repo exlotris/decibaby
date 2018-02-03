@@ -60,9 +60,9 @@ int main () {
 
   // Pointer to store array
   int * num;
-  double data[];
+  double data[431];
   // Call getArray function to get pointer to array
-  num = LireCSV(data.csv);
+  num = LireCSV("data.csv");
   for (int i = 0; i < 431; ++i)
   {
     data[i] =  num[i];
