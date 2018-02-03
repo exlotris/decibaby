@@ -5,10 +5,10 @@
 
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 2; // Doit avoir la meme valeur que microValue[]
-double tableauValeurVolt[5] = { };
-double tableauValeurVolt_leq10[5] = { };
+double tableauValeurVolt[10] = { };
+double tableauValeurVolt_leq10[10] = { };
 int nouvelEmplacement = 0;
-int nbValeur = 5;
+int nbValeur = 10;
 double Running_Leq = 0;
 double V_0=0.001 ; //La tension correspondant au niveau zero Decibel (*1000)
 double leq=0; // Valeur du leq initiale
@@ -65,7 +65,7 @@ int main () {
       Running_Leq += tableauValeurVolt[nouvelEmplacement];
     }
     // Calule la running average du leq
-    nouvelEmplacement += 1;
+    nouvelEmplacement++;
     if (nouvelEmplacement==nbValeur)
     {
       nouvelEmplacement=0;
@@ -77,7 +77,7 @@ int main () {
 
     // Trie le tableau tels que les valeurs les + grandes soient en premiere position
     for(int j = 0; j < nbValeur; j++) {
-        printf("%d ", tableauValeurVolt_leq10[j]);
+        printf("%d\n", tableauValeurVolt_leq10[j]);
     }
     qsort(tableauValeurVolt_leq10, nbValeur, sizeof(int), cmpfunc);
     int sum10 =0;
@@ -89,9 +89,9 @@ int main () {
     leq = 20*log10(Running_Leq/(nbValeur*V_0));
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
-    printf("leq %4d\n", leq);
-    printf("leq10 %4d\n", leq10);
-    printf("leqmax %4d\n", leqmax);
+    printf("leq %lf\n", leq);
+    printf("leq10 %lf\n", leq10);
+    printf("leqmax %lf\n", leqmax);
     looop++;
     delay(800);
   }
