@@ -115,7 +115,7 @@ int main () {
 
 
 
-  while (looop<431) {
+  while (looop<2) {
     /*int array[NbSample];
     for(int i = 0; i < NbSample; i++)
     {
