@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
     fprintf(stderr, "I2C: Failed to acquire bus access/talk to slave 0x%x\n", ADDRESS);
     exit(1);
   }
-  printf("argv[arg] %d\n", argv[arg]);
+
 
   int arg;
 
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
       fprintf(stderr, "Invalid parameter %d \"%s\"\n", arg, argv[arg]);
       exit(1);
     }
-
+    printf("argv[arg] %d\n", argv[arg]);
     printf("Sending %d\n", val);
 
     cmd[0] = val;
