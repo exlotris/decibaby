@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-int getIndexOfMin(int * array, int size);
-void removeAnIndexFromArray(int* array, int size, int index);
-int* sortArray(int* array, int size);
-
 //Pin declaration*******************************************************
 //int microPin = 0;          // select the input pin for the micro input
 //byte Led_Leq_Max_Pin = 7;      // LED of the Leq Max
@@ -40,46 +36,8 @@ double leqmax=0; //Valeur du leqmax initiale
 double sum10=0; //
 
 
-//get the index of the minimum value in the array
-
-int getIndexOfMin(int * array, int size){
-    int min = *array;
-    int i = 0 ;
-    int index = 0;
-    for (i = 0 ; i < size; i++){
-        if (min > *(array+i)){
-            min = *(array+i);
-            index = i;
-        }
-    }
-    return index;
-}
-
-//remove the minimum value from the array
-
-void removeAnIndexFromArray(int* array, int size, int index){
-    *(array + index) = 0;
-    if (index != (size-1)){
-        int i = index;
-        for (i = index; i < (size -1); i++){
-            *(array + i) = *(array + (i+1));
-        }
-    }
-}
-//code pour trier tableau
-int* sortArray(int* array, int size){
-    int min  = *array;
-    int originalSize = size;
-    int * temp;
-    temp = (int* )malloc(sizeof(int) * size);
-    int i = size-1;
-    int index;
-    while(size > 0){
-        index = getIndexOfMin(array,size);
-        temp[i--] = array[index];
-        removeAnIndexFromArray(array, size --,index);
-    }
-    return temp;
+int cmpfunc (const void * a, const void * b) {
+   return ( *(int*)a - *(int*)b );
 }
 
 //*********************************************************************************
@@ -127,8 +85,7 @@ tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
 }
 
 // Trie le tableau tels que les valeurs les + grandes soient en premiere position
-tableauValeurVolt_leq10 = sortArray(*tableauValeurVolt_leq10,nbValeur);
-
+qsort(tableauValeurVolt_leq10, nbValeur, sizeof(int), cmpfunc);
 int sum10 =0;
 for (int i=0; i<(nbValeur/10); i++)
   {
