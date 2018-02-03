@@ -44,6 +44,7 @@ int main () {
     printf("sum %lf\n", sum);
 
     tableauValeurVolt[nouvelEmplacement]=sum/NbSample;
+    printf("nouvelEmplacement %lf\n", nouvelEmplacement);
     printf("Nouvelle valeur %lf\n", tableauValeurVolt[nouvelEmplacement]);
 
 
