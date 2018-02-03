@@ -148,12 +148,12 @@ int main () {
         if (read(file, buf, 1) == 1)
         {
           int temp = (int) buf[0];
-          printf("Received %d\n", temp);
+          printf("Received %lf\n", temp/1024*5);
         }
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);
     }
-
+    tableauValeurVolt[indexTableau]=temp/1024*5;
 
 
     // Calule la moyenne du leq
