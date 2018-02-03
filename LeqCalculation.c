@@ -148,7 +148,7 @@ int main () {
         if (read(file, buf, 1) == 1)
         {
           AnalogReadArduino = (int) buf[0];
-          printf("Received %lf\n", AnalogReadArduino);
+          printf("Received %d\n", AnalogReadArduino);
         }
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);
