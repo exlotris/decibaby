@@ -3,6 +3,17 @@
 #include <wiringPi.h>//necessaire pour la fonction delay
 #include <math.h>//necessaire pour la fonction log10
 
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
+#include <linux/i2c-dev.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+
+#define ADDRESS 0x04 //adress de l'arduino
+// The I2C bus: This is for V2 pi's. For V1 Model B you need i2c-0
+static const char *devName = "/dev/i2c-1";
+
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
 double tableauValeurVolt[40] = { };
@@ -81,6 +92,29 @@ int main () {
   //AffichageTab(data, sizeof(data)/sizeof(double));
   //*********************************************************************
   //*********************************************************************
+
+  //*********************************************************************
+  //lecture de l'arduino destiné à être remplacer par un adc
+  //*********************************************************************
+  printf("I2C: Connecting\n");
+  int file;
+
+  if ((file = open(devName, O_RDWR)) < 0) {
+    fprintf(stderr, "I2C: Failed to access %d\n", devName);
+    exit(1);
+  }
+
+  printf("I2C: acquiring buss to 0x%x\n", ADDRESS);
+
+  if (ioctl(file, I2C_SLAVE, ADDRESS) < 0) {
+    fprintf(stderr, "I2C: Failed to acquire bus access/talk to slave 0x%x\n", ADDRESS);
+    exit(1);
+  }
+  //*********************************************************************
+  //*********************************************************************
+
+
+
   while (looop<431) {
     /*int array[NbSample];
     for(int i = 0; i < NbSample; i++)
@@ -98,9 +132,28 @@ int main () {
 
     tableauValeurVolt[indexTableau]=sum/NbSample;
     */
-    tableauValeurVolt[indexTableau]=data[looop];
+    //tableauValeurVolt[indexTableau]=data[looop];
 
     //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
+
+        // As we are not talking to direct hardware but a microcontroller we
+        // need to wait a short while so that it can respond.
+        //
+        // 1ms seems to be enough but it depends on what workload it has
+        usleep(10000);
+        char buf[1];
+        if (read(file, buf, 1) == 1)
+        {
+          int temp = (int) buf[0];
+          printf("Received %d\n", temp);
+        }
+      // Now wait else you could crash the arduino by sending requests too fast
+      usleep(10000);
+
+
+
+
+
 
     // Calule la moyenne du leq
     if (tableauValeurVolt[nbValeur-1] != 0)
