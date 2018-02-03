@@ -43,7 +43,6 @@
 */
 /**************************************************************************/
 #include "ads1015.h"
-#include "core/systick/systick.h"
 
 extern volatile uint8_t   I2CMasterBuffer[I2C_BUFSIZE];
 extern volatile uint8_t   I2CSlaveBuffer[I2C_BUFSIZE];
@@ -185,7 +184,7 @@ ads1015Error_t ads1015ReadADC_SingleEnded(uint8_t channel, uint16_t *value)
   if (error) return error;
 
   // Wait for the conversion to complete
-  systickDelay(1);
+  delay(1);
 
   // Read the conversion results
   error = ina219Read16(ADS1015_REG_POINTER_CONVERT, value);
@@ -236,7 +235,7 @@ ads1015Error_t ads1015ReadADC_Differential_0_1(int16_t *value)
   if (error) return error;
 
   // Wait for the conversion to complete
-  systickDelay(1);
+  delay(1);
 
   // Read the conversion results
   error = ina219Read16(ADS1015_REG_POINTER_CONVERT, value);
@@ -287,7 +286,7 @@ ads1015Error_t ads1015ReadADC_Differential_2_3(int16_t *value)
   if (error) return error;
 
   // Wait for the conversion to complete
-  systickDelay(1);
+  delay(1);
 
   // Read the conversion results
   error = ina219Read16(ADS1015_REG_POINTER_CONVERT, value);
@@ -389,7 +388,7 @@ ads1015Error_t ads1015GetLastConversionResults(int16_t *value)
   }
 
   // Wait for the conversion to complete
-  systickDelay(1);
+  delay(1);
 
   // Read the conversion results
   error = ina219Read16(ADS1015_REG_POINTER_CONVERT, value);
@@ -400,7 +399,3 @@ ads1015Error_t ads1015GetLastConversionResults(int16_t *value)
 
   return error;
 }
-
-
-
-

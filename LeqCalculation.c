@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <wiringPi.h>
-#include <math.h>
+#include <wiringPi.h>//necessaire pour la fonction delay
+#include <math.h>//necessaire pour la fonction log10
 
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
@@ -23,20 +23,17 @@ static int cmp (void const *a, void const *b)
    double const *pa = a;
    double const *pb = b;
    double diff = *pb - *pa;
-   if (diff > 0)
-   {
-      ret = 1;
-   }
-   else if (diff < 0)
-   {
-      ret = -1;
-   }
-   else
-   {
-      ret = 0;
-   }
-
+   if (diff > 0) {ret = 1;}
+   else if (diff < 0) { ret = -1;}
+   else { ret = 0;}
    return ret;
+}
+void AffichageTab (int array[]) {}
+  int n = sizeof(array);
+  for(int j = 0; j < n; j++) {
+      printf(" %lf", array[j]);
+  }
+  printf("\n");
 }
 
 int main () {
@@ -107,6 +104,7 @@ int main () {
         printf(" %lf", tableauValeurVolt_leq10[j]);
     }
     printf("\n");
+    AffichageTab(tableauValeurVolt_leq10);
     int sum10 =0;
     for (int i=0; i<(nbValeur/10); i++)
     {
