@@ -22,7 +22,7 @@ static int cmp (void const *a, void const *b)
    int ret = 0;
    double const *pa = a;
    double const *pb = b;
-   double diff = *pa - *pb;
+   double diff = *pb - *pa;
    if (diff > 0)
    {
       ret = 1;
