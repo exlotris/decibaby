@@ -28,10 +28,10 @@ static int cmp (void const *a, void const *b)
    else { ret = 0;}
    return ret;
 }
-void AffichageTab (double array[]) {}
-  int n = sizeof(array) / sizeof(int);;
+void AffichageTab (double a[]) {}
+  int n = sizeof(a) / sizeof(int);;
   for(int j = 0; j < n; j++) {
-      printf(" %lf", array[j]);
+      printf(" %lf", a[j]);
   }
   printf("\n");
 }
