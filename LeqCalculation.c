@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <wiringPi.h>//necessaire pour la fonction delay
 #include <math.h>//necessaire pour la fonction log10
-#include "valeursTest.csv"
+#include "data.csv"
+
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
 double tableauValeurVolt[40] = { };
