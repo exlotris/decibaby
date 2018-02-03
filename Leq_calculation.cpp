@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+int getIndexOfMin(int * array, int size);
+void removeAnIndexFromArray(int* array, int size, int index);
+int* sortArray(int* array, int size);
+
 //Pin declaration*******************************************************
 //int microPin = 0;          // select the input pin for the micro input
 //byte Led_Leq_Max_Pin = 7;      // LED of the Leq Max
@@ -80,7 +84,7 @@ int* sortArray(int* array, int size){
 
 //*********************************************************************************
 //*********************************************************************************
-int main()
+int main(void)
 {
 //                                      // read the value from the micro after filtering:
 //for(int i=0; i<NbSample; i++)
