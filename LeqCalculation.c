@@ -114,7 +114,7 @@ int main () {
   //*********************************************************************
 
 
-  while (looop<10) {
+  while (looop<1000) {
     /*int array[NbSample];
     for(int i = 0; i < NbSample; i++)
     {
@@ -153,7 +153,7 @@ int main () {
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);
     }
-    tableauValeurVolt[indexTableau]=AnalogReadArduino/1024*5;
+    tableauValeurVolt[indexTableau]=AnalogReadArduino/204.8;
 
 
     // Calule la moyenne du leq
