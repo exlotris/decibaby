@@ -145,19 +145,17 @@ int main () {
     if (write(file, cmd, 1) == 1) {
         usleep(10000);
         char buf[1];
+        char a,b;
         read(file, buf, 1);
-        unsigned char received = buf[0];
-        for (int i = 0 ; i < 3 ; i++) // next 3 bytes
-        {
-          if (read(file, buf, 1) == 1)
-          {
-            unsigned char received = buf[0];
-            printf("Received %d\n", buf[0]);
-            AnalogReadArduino |= (received << 8);
-          }
-        }
-          //AnalogReadArduino = (int) buf[0];
-          printf("Received %d\n", AnalogReadArduino);
+        printf("Received %d\n", buf[0]);
+        a = buf[0];
+        read(file, buf, 1);
+        printf("Received %d\n", buf[0]);
+        b = buf[0];
+        AnalogReadArduino = a;
+        AnalogReadArduino = smallNum << 8 | b;
+        //AnalogReadArduino = (int) buf[0];
+        printf("Received %d\n", AnalogReadArduino);
         }
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);

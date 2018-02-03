@@ -9,6 +9,7 @@ int byteSending = 1;
 int toTransfer = 32767;
 int Shift = toTransfer;
 int mask = 0xFF;
+unsigned char toSend = 3;
 
 void setup() {
 
@@ -39,36 +40,8 @@ void receiveData(int byteCount)
 // callback for sending data
 void sendData(){
  //Wire.write(number);
- if (byteSending == 1) //send packet 1
- {
-   number = Shift & mask;
-   Shift = Shift >> 8;
-   Wire.write(number);
-   byteSending = 2;
- }
- else if (byteSending == 2) //send packet 2
- {
-   number = Shift & mask;
-   Shift = Shift >> 8;
-   Wire.write(number);
-   byteSending = 3;
- }
- else if (byteSending == 3) //send packet 3
- {
-   number = Shift & mask;
-   Shift = Shift >> 8;
-   Wire.write(number);
-   byteSending = 4;
- }
- else if (byteSending == 4) //send packet 4
- {
-   number = Shift & mask;
-   Shift = Shift >> 8;
-   Wire.write(number);
-   byteSending = 1;
-   //initialization for next turn
-   Shift = toTransfer;
-   mask = 0xFF;
-   number = 0;
- }
+byte myArray[2];
+myArray[0] = (number >> 8) & 0xFF;
+myArray[1] = number & 0xFF;
+Wire.write(myArray, 2);
 }
