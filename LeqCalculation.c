@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <wiringPi.h>//necessaire pour la fonction delay
 #include <math.h>//necessaire pour la fonction log10
-
+#include "valeursTest.csv"
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
 double tableauValeurVolt[40] = { };
@@ -35,14 +35,39 @@ void AffichageTab (double tableau[], int length) {
   }
   printf("\n");
 }
+double* LireCSV(const char *filename, int lenght)
+{
+  double tmp = 0;
+  static double tab[lenght];
+  int i = 0;
+  FILE *f;
+  if((f = fopen(filename, "r")) == NULL)
+  {exit(-1);}
+  while(!feof(f))
+  {
+    fscanf(f, "%lf", &tmp);
+    printf("tmp = %f \n", tmp);
+    tab[i] = tmp;
+    i++;
+  }
+    fclose(f);
+    return tab;
+}
 
 int main () {
-  double x, ret;
-  x = 5000;
-  ret = log10(x);
-  printf("log10(%lf) = %lf\n", x, ret);
-
   int looop=0;
+  int i;
+
+  // Pointer to store array
+  int * num;
+  double data[];
+  // Call getArray function to get pointer to array
+  num = LireCSV(data.csv, 431);
+  for (int i = 0; i < 431; ++i)
+  {
+    data[i] =  num[i];
+  }
+  AffichageTab(data, sizeof(data)/sizeof(double));
   while (looop<nbValeur) {
     int array[NbSample];
     for(int i = 0; i < NbSample; i++)
@@ -60,16 +85,10 @@ int main () {
 
     tableauValeurVolt[indexTableau]=sum/NbSample;
 
-
-    for(int j = 0; j < nbValeur; j++) {
-        printf(" %lf", tableauValeurVolt[j]);
-    }
-    printf("\n");
-
-    printf("indexTableau %4d\n", indexTableau);
-    printf("Nouvelle valeur %lf\n", tableauValeurVolt[indexTableau]);
+    AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
 
+    // Calule la running average du leq
     if (tableauValeurVolt[nbValeur-1] != 0)
     {
       if (indexTableau != 0)
@@ -87,12 +106,20 @@ int main () {
     {
       Running_Leq += tableauValeurVolt[indexTableau];
     }
-    // Calule la running average du leq
+
+
+
+
+
     indexTableau++;
     if (indexTableau==nbValeur)
     {
       indexTableau=0;
     }
+
+
+
+    //copie tableau
     for(int i=0; i<nbValeur;i++)
     {
       tableauValeurVolt_leq10[i]=tableauValeurVolt[i];
@@ -100,17 +127,17 @@ int main () {
 
     // Trie le tableau tels que les valeurs les + grandes soient en premiere position
     qsort(tableauValeurVolt_leq10, sizeof tableauValeurVolt_leq10 / sizeof *tableauValeurVolt_leq10, sizeof *tableauValeurVolt_leq10, cmp);
-    for(int j = 0; j < nbValeur; j++) {
-        printf(" %lf", tableauValeurVolt_leq10[j]);
-    }
-    printf("\n");
+
     AffichageTab(tableauValeurVolt_leq10, sizeof(tableauValeurVolt_leq10)/sizeof(double));
+
+    //somme les valeurs utile pour le Leq10
     int sum10 =0;
     for (int i=0; i<(nbValeur/10); i++)
     {
       sum10+= tableauValeurVolt_leq10[i];
     }
-    // Calcule le leq du tableau microValue
+
+    // Calcule les leq
     leq = 20*log10(Running_Leq/(nbValeur*V_0));
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
