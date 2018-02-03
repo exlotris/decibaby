@@ -154,7 +154,7 @@ int main () {
       usleep(10000);
     }
     tableauValeurVolt[indexTableau]=AnalogReadArduino/204.8;
-
+    AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
     // Calule la moyenne du leq
     if (tableauValeurVolt[nbValeur-1] != 0)
