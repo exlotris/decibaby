@@ -32,7 +32,7 @@ static int cmp (void const *a, void const *b)
 void AffichageTab (double *tableau) {
   int n = sizeof(tableau)/sizeof(double);
   for(int j = 0; j < n; j++) {
-      printf(" %lf", a[j]);
+      printf(" %lf", tableau[j]);
   }
   printf("\n");
 }
