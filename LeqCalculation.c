@@ -152,6 +152,7 @@ int main () {
           if (read(file, buf, 1) == 1)
           {
             unsigned char received = buf[0];
+            printf("Received %d\n", buf[0]);
             AnalogReadArduino |= (received << 8);
           }
         }
@@ -160,7 +161,7 @@ int main () {
         }
       // Now wait else you could crash the arduino by sending requests too fast
       usleep(10000);
-    
+
     tableauValeurVolt[indexTableau]=AnalogReadArduino/204.8;
     AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
