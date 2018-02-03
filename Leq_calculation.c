@@ -9,7 +9,7 @@ int tableauValeurVolt_leq10[300] = { };
 int nouvelEmplacement = 0;
 int nbValeur = 300;
 int Running_Leq = 0;
-const int V_0=1 ; //La tension correspondant au niveau zero Decibel (*1000)
+int V_0=1 ; //La tension correspondant au niveau zero Decibel (*1000)
 double leq=0; // Valeur du leq initiale
 double leq10=0; // Valeur du leq10 initiale
 double leqmax=0; //Valeur du leqmax initiale
@@ -18,10 +18,5 @@ double sum10=0; //
 //*********************************************************************************
 int main()
   {
-
    return(0);
-}
-
-int cmpfunc (const void * a, const void * b) {
-   return ( *(int*)a - *(int*)b );
 }
