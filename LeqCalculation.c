@@ -75,7 +75,9 @@ int main () {
     }
 
     // Trie le tableau tels que les valeurs les + grandes soient en premiere position
-    printf(tableauValeurVolt_leq10[0], tableauValeurVolt_leq10[1], tableauValeurVolt_leq10[2],tableauValeurVolt_leq10[3],tableauValeurVolt_leq10[4]);
+    for(int j = 0; j < nbValeur; j++) {
+        printf("%d ", tableauValeurVolt_leq10[j]);
+    } 
     qsort(tableauValeurVolt_leq10, nbValeur, sizeof(int), cmpfunc);
     int sum10 =0;
     for (int i=0; i<(nbValeur/10); i++)
