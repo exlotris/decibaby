@@ -28,7 +28,7 @@ static int cmp (void const *a, void const *b)
    else { ret = 0;}
    return ret;
 }
-void AffichageTab (int array[]) {}
+void AffichageTab (double array[]) {}
   int n = sizeof(array);
   for(int j = 0; j < n; j++) {
       printf(" %lf", array[j]);
