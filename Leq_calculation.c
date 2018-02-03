@@ -42,7 +42,7 @@ int cmpfunc (const void * a, const void * b) {
 
 //*********************************************************************************
 //*********************************************************************************
-int main(void)
+int main()
 {
 //                                      // read the value from the micro after filtering:
 //for(int i=0; i<NbSample; i++)
@@ -101,5 +101,5 @@ leq10 = 20*log10(sum10/((nbValeur/10)*V_0/1000));
 
                                       // Calcule le leqmax du tableau microValue
 leqmax = 20*log10((tableauValeurVolt_leq10[0]+tableauValeurVolt_leq10[1])/(2*V_0/1000));
-return 0;
+return (0);
 }
