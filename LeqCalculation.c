@@ -46,7 +46,7 @@ int fileWrite()
     printf("Couldn't open file.txt\n");
     return 0;
   }
-  fprintf(fp,"%s,%f,%f,%f",asctime(gmtime(&result)), leq, leq10, leqmax);    /* write the CSV data to the file */
+  fprintf(fp,"%s, %f, %f, %f\n",asctime(gmtime(&result)), leq, leq10, leqmax);    /* write the CSV data to the file */
   fclose(fp); // close the file
   return 0;
 }
@@ -95,6 +95,16 @@ double* LireCSV(const char *filename)
 
 int main () {
   int looop=0; //au final le loop sera infini
+  FILE *fp;    /* File pointer */
+  /* Open for writing the file record.csv */
+  if (NULL == (fp = fopen("record.csv","w")))
+  {
+    /* if it doesn't succeed, exit out */
+    printf("Couldn't open file.txt\n");
+    return 0;
+  }
+  fprintf(fp,"date, Leq50, Leq10, LeqMax\n");    /* write the CSV data to the file */
+  fclose(fp); // close the file
   /*
   //*********************************************************************
   //lecture d'un fichier destiné à être remplacer par la lecture du micro
