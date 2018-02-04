@@ -118,8 +118,8 @@ int main () {
 
 
   while (looop<100) {
-    while(millis()-time<(62.5-excecutingTime)
-    {};
+    while(millis()-time<(62.5-excecutingTime))
+    {}
     testtime = millis()-time;
     printf("leqmax %lf\n", testtime);
     time = millis();
