@@ -247,7 +247,7 @@ int main () {
     if(theseSecs-startSecs >10)
     {
     fileWrite();
-    elapsedTime=time(NULL);
+    start_time();
     //  enregistrement des trois valeurs avec timestamp dans un fichier CSV
     //  envoi des trois valeur sur reseau
     }
