@@ -40,14 +40,14 @@ int fileWrite()
   time_t result = time(NULL);
   FILE *fp;    /* File pointer */
   /* Open for writing the file record.csv */
-  if (NULL == (fp = fopen("record.csv","w")))
+  if (NULL == (fp = fopen("record.csv","a")))
   {
     /* if it doesn't succeed, exit out */
     printf("Couldn't open file.txt\n");
     return 0;
   }
   fprintf(fp,"%s,%f,%f,%f",asctime(gmtime(&result)), leq, leq10, leqmax);    /* write the CSV data to the file */
-  fclose(fp); /* close the file we opened earlier*/
+  fclose(fp); // close the file
   return 0;
 }
 //fonction pour le tri du tableau
