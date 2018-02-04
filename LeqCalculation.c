@@ -117,7 +117,7 @@ int main () {
   //*********************************************************************
 
 
-  while (looop<100) {
+  while (looop<10000) {
     while(micros()-time<(62.5-excecutingTime))
     {}
     testtime = micros()-time;
