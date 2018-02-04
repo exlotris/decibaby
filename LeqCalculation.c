@@ -16,9 +16,8 @@ static const char *devName = "/dev/i2c-1";
 
 double periode = 16000; //microsecond
 double periodeMesure = 2; //en minutes
-int nbValeur = (int)2*60*1000000/16000;//nombre de mesure
-double tableauValeurVolt[nbValeur] = { };
-double tableauValeurVolt_leq10[nbValeur] = { };
+int nbValeur = 7500;//nombre de mesure
+
 double time,excecutingTime,testtime = 0;
 double microValue[20] = { }; // Le nombre de valeurs moyennées
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
@@ -78,6 +77,8 @@ double* LireCSV(const char *filename)
 
 int main () {
   int looop=0; //au final le loop sera infini
+  double tableauValeurVolt[nbValeur] = { };
+  double tableauValeurVolt_leq10[nbValeur] = { };
   /*
   //*********************************************************************
   //lecture d'un fichier destiné à être remplacer par la lecture du micro
