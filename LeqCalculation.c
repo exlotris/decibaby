@@ -242,7 +242,7 @@ int main () {
     leq = 20*log10(Running_Leq/(nbValeur*V_0));
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
-    getSecs()
+    getSecs();
     printf("theseSecs %lf\n", theseSecs);
     if(theseSecs-startSecs >10)
     {
