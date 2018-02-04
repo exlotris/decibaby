@@ -15,12 +15,10 @@
 static const char *devName = "/dev/i2c-1";
 
 double periode = 16000; //microsecond
+double periodeMesure = 2; //en minutes
 double time,excecutingTime,testtime = 0;
-double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
+double microValue[20] = { }; // Le nombre de valeurs moyennées
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
-int nbValeur = 2*60*1000000/periode;//2min de valleurs
-double tableauValeurVolt[nbValeur] = { };
-double tableauValeurVolt_leq10[nbValeur] = { };
 int indexTableau = 0;
 double Running_Leq = 0;
 double V_0=0.0104 ; //La tension correspondant au niveau zero Decibel (*1000)
@@ -77,6 +75,9 @@ double* LireCSV(const char *filename)
 
 int main () {
   int looop=0; //au final le loop sera infini
+  double nbValeur = periodeMesure*60*1000000/periode;//nombre de mesure
+  double tableauValeurVolt[nbValeur] = { };
+  double tableauValeurVolt_leq10[nbValeur] = { };
   /*
   //*********************************************************************
   //lecture d'un fichier destiné à être remplacer par la lecture du micro
