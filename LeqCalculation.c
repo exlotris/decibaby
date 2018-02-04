@@ -34,7 +34,25 @@ double leqmax=0; //Valeur du leqmax initiale
 double sum =0;
 double sum10=0; //
 int AnalogReadArduino=0;
+double  theseSecs = 0.0;
+double  startSecs = 0.0;
+struct  timespec tp1;
 time_t elapsedTime;
+
+void getSecs()
+{
+     clock_gettime(CLOCK_REALTIME, &tp1);
+
+     theseSecs =  tp1.tv_sec + tp1.tv_nsec / 1e9;
+     return;
+}
+
+void start_time()
+{
+    getSecs();
+    startSecs = theseSecs;
+    return;
+}
 
 int fileWrite()
 {
@@ -99,7 +117,7 @@ double* LireCSV(const char *filename)
 
 int main () {
   int looop=0; //au final le loop sera infini
-  elapsedTime=time(NULL)-60;
+  start_time();
   FILE *fp;    /* File pointer */
   /* Open for writing the file record.csv */
   if (NULL == (fp = fopen("record.csv","w")))
@@ -224,8 +242,9 @@ int main () {
     leq = 20*log10(Running_Leq/(nbValeur*V_0));
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
-
-    if(time(NULL)-elapsedTime>10)
+    getSecs()
+    printf("theseSecs %lf\n", theseSecs);
+    if(theseSecs-startSecs >10)
     {
     fileWrite();
     elapsedTime=time(NULL);
