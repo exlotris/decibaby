@@ -21,7 +21,7 @@ double periodeMesure = 2; //en minutes
 int nbValeur = 1250;// 20 secondes, nombre de mesure minute*60sec*1000'000/periode
 double tableauValeurVolt[1250] = { };
 double tableauValeurVolt_leq10[1250] = { };
-double time,excecutingTime,testtime = 0;
+double timetemp,excecutingTime,testtime = 0;
 double microValue[20] = { }; // Le nombre de valeurs moyennées
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
 int indexTableau = 0;
@@ -137,11 +137,11 @@ int main () {
 
 
   while (looop<10000) {
-    while(micros()-time<periode)
+    while(micros()-timetemp<periode)
     {}
     //testtime = micros()-time;
     //printf("testtime %lf\n", testtime);
-    time = micros();
+    timetemp = micros();
     //tableauValeurVolt[indexTableau]=data[looop];
 
     //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
