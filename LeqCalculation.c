@@ -225,7 +225,7 @@ int main () {
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
 
-    if(time(NULL)-elapsedTime>60)
+    if(time(NULL)-elapsedTime>10)
     {
     fileWrite();
     elapsedTime=time(NULL);
