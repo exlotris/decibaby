@@ -75,12 +75,13 @@ double* LireCSV(const char *filename)
 }
 
 int main () {
+  int looop=0; //au final le loop sera infini
   /*
   //*********************************************************************
   //lecture d'un fichier destiné à être remplacer par la lecture du micro
   //*********************************************************************
 
-  int looop=0; //au final le loop sera infini
+
 
   // Pointer to store array
   double * num;
