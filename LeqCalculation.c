@@ -34,6 +34,7 @@ double leqmax=0; //Valeur du leqmax initiale
 double sum =0;
 double sum10=0; //
 int AnalogReadArduino=0;
+time_t elapsedTime;
 
 int fileWrite()
 {
@@ -50,7 +51,7 @@ int fileWrite()
     return 0;
   }
   fprintf(fp,"%s, %f, %f, %f\n",s, leq, leq10, leqmax);    /* write the CSV data to the file */
-  //fclose(fp); // close the file
+  fclose(fp); // close the file
   return 0;
 }
 //fonction pour le tri du tableau
@@ -98,6 +99,7 @@ double* LireCSV(const char *filename)
 
 int main () {
   int looop=0; //au final le loop sera infini
+  elapsedTime=time(NULL)-60;
   FILE *fp;    /* File pointer */
   /* Open for writing the file record.csv */
   if (NULL == (fp = fopen("record.csv","w")))
@@ -223,12 +225,13 @@ int main () {
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
 
-    //if(temps>1 minute)
-    //{
+    if(time(NULL)-elapsedTime>60)
+    {
     fileWrite();
+    elapsedTime=time(NULL);
     //  enregistrement des trois valeurs avec timestamp dans un fichier CSV
     //  envoi des trois valeur sur reseau
-    //}
+    }
     printf("dBA instentané %lf\n", dBA);
     printf("leq %lf\n", leq);
     printf("leq10 %lf\n", leq10);
