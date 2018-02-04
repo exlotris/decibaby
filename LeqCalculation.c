@@ -118,7 +118,7 @@ int main () {
 
 
   while (looop<10000) {
-    while(micros()-time<(62.5-excecutingTime))
+    while(micros()-time<(6250-excecutingTime))
     {}
     testtime = micros()-time;
     printf("testtime %lf\n", testtime);
