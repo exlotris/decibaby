@@ -9,13 +9,8 @@
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
-#include <fstream>
 #include <time.h>
 
-
-
-
-using namespace std;
 
 #define ADDRESS 0x04 //adress de l'arduino
 // The I2C bus: This is for V2 pi's. For V1 Model B you need i2c-0
@@ -43,14 +38,16 @@ int AnalogReadArduino=0;
 int fileWrite()
 {
   time_t result = time(NULL);
-  ofstream fichier("record.txt", ios::out | ios::ate);  //déclaration du flux et ouverture du fichier
-  if(fichier)  // si l'ouverture a réussi
+  FILE *fp;    /* File pointer */
+  /* Open for writing the file record.csv */
+  if (NULL == (fp = fopen("record.csv","w")))
   {
-    fichier << asctime(gmtime(&result)) << ' - Leq : ' << leq << ' - Leq10 : ' << leq10 << ' - LeqMax : ' << leqmax << endl;
-    fichier.close();  // on referme le fichier
+    /* if it doesn't succeed, exit out */
+    printf("Couldn't open file.txt\n");
+    return 0;
   }
-  else  // sinon
-    cerr << "Erreur à l'ouverture !" << endl;
+  fprintf(fp,"%s,%f,%f,%f",asctime(gmtime(&result)), leq, leq10, leqmax);    /* write the CSV data to the file */
+  fclose(fp); /* close the file we opened earlier*/
   return 0;
 }
 //fonction pour le tri du tableau
