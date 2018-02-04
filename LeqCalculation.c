@@ -222,9 +222,10 @@ int main () {
     leq = 20*log10(Running_Leq/(nbValeur*V_0));
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
-    fileWrite();
+
     //if(temps>1 minute)
     //{
+    fileWrite();
     //  enregistrement des trois valeurs avec timestamp dans un fichier CSV
     //  envoi des trois valeur sur reseau
     //}
