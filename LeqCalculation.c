@@ -37,7 +37,10 @@ int AnalogReadArduino=0;
 
 int fileWrite()
 {
-  time_t result = time(NULL);
+  time_t t = time(NULL);
+    struct tm *tm = localtime(&t);
+    char s[64];
+    strftime(s, sizeof(s), "%c", tm);
   FILE *fp;    /* File pointer */
   /* Open for writing the file record.csv */
   if (NULL == (fp = fopen("record.csv","a")))
@@ -46,7 +49,7 @@ int fileWrite()
     printf("Couldn't open file.txt\n");
     return 0;
   }
-  fprintf(fp,"%s, %f, %f, %f\n",asctime(gmtime(&result)), leq, leq10, leqmax);    /* write the CSV data to the file */
+  fprintf(fp,"%s, %f, %f, %f\n",s, leq, leq10, leqmax);    /* write the CSV data to the file */
   fclose(fp); // close the file
   return 0;
 }
