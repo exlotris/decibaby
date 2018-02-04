@@ -14,6 +14,7 @@
 // The I2C bus: This is for V2 pi's. For V1 Model B you need i2c-0
 static const char *devName = "/dev/i2c-1";
 
+double periode = 16000; //microsecond
 double time,excecutingTime,testtime = 0;
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
@@ -118,7 +119,7 @@ int main () {
 
 
   while (looop<10000) {
-    while(micros()-time<(6250-excecutingTime))
+    while(micros()-time<periode)
     {}
     testtime = micros()-time;
     printf("testtime %lf\n", testtime);
