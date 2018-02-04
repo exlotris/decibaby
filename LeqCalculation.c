@@ -14,6 +14,7 @@
 // The I2C bus: This is for V2 pi's. For V1 Model B you need i2c-0
 static const char *devName = "/dev/i2c-1";
 
+double time,excecutingTime,testtime = 0;
 double microValue[20] = { }; // Le nombre de valeurs considerees dans le calcul du Leq
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
 double tableauValeurVolt[40] = { };
@@ -74,6 +75,7 @@ double* LireCSV(const char *filename)
 }
 
 int main () {
+  /*
   //*********************************************************************
   //lecture d'un fichier destiné à être remplacer par la lecture du micro
   //*********************************************************************
@@ -92,7 +94,7 @@ int main () {
   //AffichageTab(data, sizeof(data)/sizeof(double));
   //*********************************************************************
   //*********************************************************************
-
+  */
   //*********************************************************************
   //lecture de l'arduino destiné à être remplacer par un adc
   //*********************************************************************
@@ -114,23 +116,12 @@ int main () {
   //*********************************************************************
 
 
-  while (looop<1000) {
-    /*int array[NbSample];
-    for(int i = 0; i < NbSample; i++)
-    {
-      array[i] = (rand() % 500)+1;
-      printf("%4d\n", array[i]);
-    }
-
-    sum = 0;
-    for (int i=0; i<NbSample; i++)
-    {
-      sum+= array[i]/100;
-    }
-    printf("sum %lf\n", sum);
-
-    tableauValeurVolt[indexTableau]=sum/NbSample;
-    */
+  while (looop<100) {
+    while(millis()-time<(62.5-excecutingTime)
+    {}
+    testtime = millis()-time;
+    printf("leqmax %lf\n", testtime);
+    time = millis();
     //tableauValeurVolt[indexTableau]=data[looop];
 
     //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
@@ -147,9 +138,7 @@ int main () {
         char buf[2];
         char a,b;
         read(file, buf, 2);
-        printf("Received %d\n", buf[0]);
         a = buf[0];
-        printf("Received %d\n", buf[1]);
         b = buf[1];
         AnalogReadArduino = a;
         AnalogReadArduino = AnalogReadArduino << 8 | b;
@@ -205,7 +194,9 @@ int main () {
     printf("leqmax %lf\n", leqmax);
 
     looop++;
-    delay(10);
+    excecutingTime = millis()-time;
+    printf("leqmax %lf\n", excecutingTime);
+
   }
   return(0);
 }
