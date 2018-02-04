@@ -118,11 +118,11 @@ int main () {
 
 
   while (looop<100) {
-    while(millis()-time<(62.5-excecutingTime))
+    while(micros()-time<(62.5-excecutingTime))
     {}
-    testtime = millis()-time;
-    printf("leqmax %lf\n", testtime);
-    time = millis();
+    testtime = micros()-time;
+    printf("testtime %lf\n", testtime);
+    time = micros();
     //tableauValeurVolt[indexTableau]=data[looop];
 
     //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
@@ -195,8 +195,8 @@ int main () {
     printf("leqmax %lf\n", leqmax);
 
     looop++;
-    excecutingTime = millis()-time;
-    printf("leqmax %lf\n", excecutingTime);
+    excecutingTime = micros()-time;
+    printf("excecutingTime %lf\n", excecutingTime);
 
   }
   return(0);
