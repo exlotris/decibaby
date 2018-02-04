@@ -50,7 +50,7 @@ int fileWrite()
     return 0;
   }
   fprintf(fp,"%s, %f, %f, %f\n",s, leq, leq10, leqmax);    /* write the CSV data to the file */
-  fclose(fp); // close the file
+  //fclose(fp); // close the file
   return 0;
 }
 //fonction pour le tri du tableau
