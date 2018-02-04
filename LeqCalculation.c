@@ -16,9 +16,9 @@ static const char *devName = "/dev/i2c-1";
 
 double periode = 16000; //microsecond
 double periodeMesure = 2; //en minutes
-int nbValeur = 7500;//nombre de mesure
-double tableauValeurVolt[7500] = { };
-double tableauValeurVolt_leq10[7500] = { };
+int nbValeur = 1250;// 20 secondes, nombre de mesure minute*60sec*1000'000/periode
+double tableauValeurVolt[1250] = { };
+double tableauValeurVolt_leq10[1250] = { };
 double time,excecutingTime,testtime = 0;
 double microValue[20] = { }; // Le nombre de valeurs moyennées
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
@@ -122,8 +122,8 @@ int main () {
   while (looop<10000) {
     while(micros()-time<periode)
     {}
-    testtime = micros()-time;
-    printf("testtime %lf\n", testtime);
+    //testtime = micros()-time;
+    //printf("testtime %lf\n", testtime);
     time = micros();
     //tableauValeurVolt[indexTableau]=data[looop];
 
@@ -197,8 +197,8 @@ int main () {
     printf("leqmax %lf\n", leqmax);
 
     looop++;
-    excecutingTime = micros()-time;
-    printf("excecutingTime %lf\n", excecutingTime);
+    //excecutingTime = micros()-time;
+    //printf("excecutingTime %lf\n", excecutingTime);
 
   }
   return(0);
