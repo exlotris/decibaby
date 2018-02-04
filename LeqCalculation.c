@@ -150,7 +150,7 @@ int main () {
         }
 
     tableauValeurVolt[indexTableau]=AnalogReadArduino/310.3;
-    AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
+    //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
     // Calule la moyenne du leq
       if (indexTableau != nbValeur-1)
