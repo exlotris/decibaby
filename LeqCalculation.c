@@ -9,6 +9,13 @@
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
+#include <fstream>
+#include <time.h>
+
+
+
+
+using namespace std;
 
 #define ADDRESS 0x04 //adress de l'arduino
 // The I2C bus: This is for V2 pi's. For V1 Model B you need i2c-0
@@ -33,7 +40,19 @@ double sum =0;
 double sum10=0; //
 int AnalogReadArduino=0;
 
-
+int fileWrite()
+{
+  time_t result = time(NULL);
+  ofstream fichier("record.txt", ios::out | ios::ate);  //déclaration du flux et ouverture du fichier
+  if(fichier)  // si l'ouverture a réussi
+  {
+    fichier << asctime(gmtime(&result)) << ' - Leq : ' << leq << ' - Leq10 : ' << leq10 << ' - LeqMax : ' << leqmax << endl;
+    fichier.close();  // on referme le fichier
+  }
+  else  // sinon
+    cerr << "Erreur à l'ouverture !" << endl;
+  return 0;
+}
 //fonction pour le tri du tableau
 static int cmp (void const *a, void const *b)
 {
@@ -193,6 +212,12 @@ int main () {
     leq = 20*log10(Running_Leq/(nbValeur*V_0));
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
+    fileWrite();
+    //if(temps>1 minute)
+    //{
+    //  enregistrement des trois valeurs avec timestamp dans un fichier CSV
+    //  envoi des trois valeur sur reseau
+    //}
     printf("dBA instentané %lf\n", dBA);
     printf("leq %lf\n", leq);
     printf("leq10 %lf\n", leq10);
