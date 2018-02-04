@@ -235,8 +235,8 @@ int main () {
     printf("leqmax %lf\n", leqmax);
 
     looop++;
-    //excecutingTime = micros()-time;
-    //printf("excecutingTime %lf\n", excecutingTime);
+    excecutingTime = micros()-timetemp;
+    printf("excecutingTime %lf\n", excecutingTime);
 
   }
   return(0);
