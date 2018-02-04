@@ -75,7 +75,7 @@ double* LireCSV(const char *filename)
 
 int main () {
   int looop=0; //au final le loop sera infini
-  double nbValeur = periodeMesure*60*1000000/periode;//nombre de mesure
+  int nbValeur = (int)periodeMesure*60*1000000/periode;//nombre de mesure
   double tableauValeurVolt[nbValeur] = { };
   double tableauValeurVolt_leq10[nbValeur] = { };
   /*
