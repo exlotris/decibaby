@@ -25,6 +25,7 @@ int NbSample = 10; // Doit avoir la meme valeur que microValue[]
 int indexTableau = 0;
 double Running_Leq = 0;
 double V_0=0.0104 ; //La tension correspondant au niveau zero Decibel (*1000)
+double dBA=0; // Valeur du leq initiale
 double leq=0; // Valeur du leq initiale
 double leq10=0; // Valeur du leq10 initiale
 double leqmax=0; //Valeur du leqmax initiale
@@ -150,6 +151,7 @@ int main () {
         }
 
     tableauValeurVolt[indexTableau]=AnalogReadArduino/310.3;
+    dBA = 20*log10(tableauValeurVolt[indexTableau]/(V_0));
     //AffichageTab(tableauValeurVolt, sizeof(tableauValeurVolt)/sizeof(double));
 
     // Calule la moyenne du leq
@@ -188,10 +190,11 @@ int main () {
     }
 
     // Calcule les leq
+    dBA = 20*log10(Running_Leq/(nbValeur*V_0));
     leq = 20*log10(Running_Leq/(nbValeur*V_0));
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
-
+    printf("dBA instentané %lf\n", dBA);
     printf("leq %lf\n", leq);
     printf("leq10 %lf\n", leq10);
     printf("leqmax %lf\n", leqmax);
