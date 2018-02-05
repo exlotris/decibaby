@@ -42,7 +42,6 @@ time_t elapsedTime;
 void getSecs()
 {
      clock_gettime(CLOCK_REALTIME, &tp1);
-
      theseSecs =  tp1.tv_sec + tp1.tv_nsec / 1e9;
      return;
 }
@@ -120,7 +119,7 @@ int main () {
   start_time();
   FILE *fp;    /* File pointer */
   /* Open for writing the file record.csv */
-  if (NULL == (fp = fopen("record.csv","w")))
+  if (NULL == (fp = fopen("record.csv","w")))//"w" a changer si l'on ne souhaite pas que le fichier soit ecrasé a chaque fois
   {
     /* if it doesn't succeed, exit out */
     printf("Couldn't open file.txt\n");
@@ -169,7 +168,7 @@ int main () {
   //*********************************************************************
 
 
-  while (looop<10000) {
+  while (TRUE) {
     while(micros()-timetemp<periode)
     {}
     //testtime = micros()-time;
@@ -196,7 +195,7 @@ int main () {
         AnalogReadArduino = a;
         AnalogReadArduino = AnalogReadArduino << 8 | b;
         //AnalogReadArduino = (int) buf[0];
-        printf("Received %lf\n", AnalogReadArduino/310.3);
+        //printf("Received %lf\n", AnalogReadArduino/310.3);
         }
 
     tableauValeurVolt[indexTableau]=AnalogReadArduino/310.3;
@@ -243,7 +242,6 @@ int main () {
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
     getSecs();
-    printf("theseSecs %lf\n", theseSecs);
     if(theseSecs-startSecs >10)
     {
     fileWrite();
@@ -258,7 +256,7 @@ int main () {
 
     looop++;
     excecutingTime = micros()-timetemp;
-    printf("excecutingTime %lf\n", excecutingTime);
+    //printf("excecutingTime %lf\n", excecutingTime);
 
   }
   return(0);
