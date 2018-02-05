@@ -249,10 +249,10 @@ int main () {
     //  enregistrement des trois valeurs avec timestamp dans un fichier CSV
     //  envoi des trois valeur sur reseau
     }
-    printf("dBA instentané %lf\n", dBA);
-    printf("leq %lf\n", leq);
-    printf("leq10 %lf\n", leq10);
-    printf("leqmax %lf\n", leqmax);
+    printf("dBA instentané %lf", dBA);
+    printf(", leq %lf", leq);
+    printf(", leq10 %lf", leq10);
+    printf(", leqmax %lf\r", leqmax);
 
     looop++;
     excecutingTime = micros()-timetemp;
