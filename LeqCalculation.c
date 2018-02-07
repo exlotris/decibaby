@@ -114,7 +114,8 @@ double* LireCSV(const char *filename)
     return tab;
 }
 
-int main () {
+int main (int v0) {
+  V_0=v0;
   int looop=0; //au final le loop sera infini
   start_time();
   FILE *fp;    /* File pointer */
