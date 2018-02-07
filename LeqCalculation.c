@@ -26,7 +26,7 @@ double microValue[20] = { }; // Le nombre de valeurs moyennées
 int NbSample = 10; // Doit avoir la meme valeur que microValue[]
 int indexTableau = 0;
 double Running_Leq = 0;
-double V_0=0.0104 ; //La tension correspondant au niveau zero Decibel (*1000)
+double V_0=0.00565 ; //La tension correspondant au niveau zero Decibel (*1000)
 double dBA=0; // Valeur en dbA instentané
 double leq=0; // Valeur du leq initiale
 double leq10=0; // Valeur du leq10 initiale
@@ -114,8 +114,7 @@ double* LireCSV(const char *filename)
     return tab;
 }
 
-int main (int v0) {
-  V_0=v0/1000.0;
+int main () {
   int looop=0; //au final le loop sera infini
   start_time();
   FILE *fp;    /* File pointer */
