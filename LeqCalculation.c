@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <wiringPi.h>//necessaire pour la fonction delay
 #include <math.h>//necessaire pour la fonction log10
-
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
@@ -12,7 +11,7 @@
 #include <time.h>
 
 
-#define ADDRESS 0x04 //adress de l'arduino
+#define ADC_Address 0x04 //adress de l'ADC (Analog to digital converter)
 // The I2C bus: This is for V2 pi's. For V1 Model B you need i2c-0
 static const char *devName = "/dev/i2c-1";
 
@@ -154,14 +153,14 @@ int main () {
   int file;
 
   if ((file = open(devName, O_RDWR)) < 0) {
-    fprintf(stderr, "I2C: Failed to access %d\n", devName);
+    fprintf(stderr, "I2C: Failed to access ADC\n");
     exit(1);
   }
 
-  printf("I2C: acquiring buss to 0x%x\n", ADDRESS);
+  printf("I2C: acquiring buss to ADC\n");
 
-  if (ioctl(file, I2C_SLAVE, ADDRESS) < 0) {
-    fprintf(stderr, "I2C: Failed to acquire bus access/talk to slave 0x%x\n", ADDRESS);
+  if (ioctl(file, I2C_SLAVE, ADC_Address) < 0) {
+    fprintf(stderr, "I2C: Failed to acquire bus access/talk to ADC\n");
     exit(1);
   }
   //*********************************************************************
@@ -186,7 +185,7 @@ int main () {
         // 1ms seems to be enough but it depends on what workload it has
 
     if (write(file, cmd, 1) == 1) {
-        usleep(10000);
+        usleep(10000);//necessaire pour l'adc a travers l'arduino, a voir quand on change pour un vrai adc
         char buf[2];
         char a,b;
         read(file, buf, 2);
@@ -242,7 +241,7 @@ int main () {
     leq10 = 20*log10(sum10/((nbValeur/10)*V_0));
     leqmax = 20*log10((tableauValeurVolt_leq10[0])/(V_0));
     getSecs();
-    if(theseSecs-startSecs >10)
+    if(theseSecs-startSecs >10) //choix de l'intervalle d'enregistrement
     {
     fileWrite();
     start_time();
