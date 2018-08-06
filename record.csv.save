@@ -1,0 +1,7 @@
+exit
+record.csv
+stop
+shutdown
+r
+date, Leq50, Leq10, LeqMax
+Mon Feb  5 13:05:19 2018, -inf, -inf, -inf
